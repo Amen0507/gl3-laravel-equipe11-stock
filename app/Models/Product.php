@@ -53,10 +53,10 @@ class Product extends Model
 
     /**
      * Scope pour filtrer les produits en alerte stock faible
-     * Condition : quantity <= low_stock_treshold
+     * Condition : quantity <= low_stock_threshold
      */
     public function scopeLowStock(Builder $query): Builder
     {
-        return $query->whereColumn('quantity', '<=', 'low_stock_treshold');
+        return $query->whereColumn('quantity', '<=', 'low_stock_threshold');
     }
 }
