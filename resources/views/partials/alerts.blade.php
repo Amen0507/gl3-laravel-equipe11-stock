@@ -5,6 +5,14 @@
     </div>
 @endif
 
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>{{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
+
 @if ($errors->any())
     <div class="alert alert-danger" role="alert">
         <i class="bi bi-exclamation-triangle me-2"></i>Le formulaire contient des erreurs :
