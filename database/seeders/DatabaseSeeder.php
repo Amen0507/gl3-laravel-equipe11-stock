@@ -78,5 +78,11 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+        
+        \App\Models\User::firstOrCreate(
+            ['email' => 'admin@boutique.test'],
+            ['name' => 'Administrateur', 'password' => 'password123']
+        );
+
     }
 }

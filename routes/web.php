@@ -1,15 +1,29 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-// Le tableau de bord
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-// Gestion des produits
-Route::resource('products', ProductController::class);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
 
-// Gestion des catégories
-Route::resource('categories', CategoryController::class)->except(['show']);
+Route::middleware('auth')->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Le tableau de bord
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Gestion des produits
+    Route::resource('products', ProductController::class);
+
+    // Gestion des catégories
+    Route::resource('categories', CategoryController::class)->except(['show']);
+});
