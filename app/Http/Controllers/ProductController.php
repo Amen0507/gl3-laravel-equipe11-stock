@@ -30,13 +30,12 @@ class ProductController extends Controller
         $categories = Category::orderBy('name')->get();
 
         return view('products.index', compact('products', 'categories'));
-
     }
 
     /**
      * Formulaire de création d'un produit
      */
-    public function create()
+    public function create(): View
     {
         $categories = Category::orderBy('name')->get();
 
@@ -48,7 +47,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request): RedirectResponse
     {
-        Product::create($request->validates());
+        Product::create($request->validated());
 
         return redirect()
             ->route('products.index')
@@ -58,7 +57,7 @@ class ProductController extends Controller
     /**
      * Détails d'un produit
      */
-    public function show(string $id)
+    public function show(Product $product): View
     {
         $product->load('category');
 
@@ -68,9 +67,9 @@ class ProductController extends Controller
     /**
      * Formulaire d'édition d'un produit
      */
-    public function edit(string $id)
+    public function edit(Product $product): View
     {
-        $categories = Categories::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
         return view('products.edit', compact('product', 'categories'));
     }
@@ -88,14 +87,14 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Suppression d'un produit
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 
         return redirect()
             ->route('products.index')
-            -with('success', 'Produit supprimé avec succès.');
+            ->with('success', 'Produit supprimé avec succès.');
     }
 }
