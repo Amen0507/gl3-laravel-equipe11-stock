@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+    @auth
     <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -48,20 +49,14 @@
                                 </button>
                             </form>
                         </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Inscription</a>
-                        </li>
                     @endauth
                 </ul>
             </div>
         </div>
     </nav>
+    @endauth
 
-    <main class="container pb-5">
+    <main class="container pb-5 {{ auth()->check() ? '' : 'pt-5' }}">
         @include('partials.alerts')
         @yield('content')
     </main>

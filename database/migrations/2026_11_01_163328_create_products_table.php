@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('category_id')->constrained()->restrictOnDeleted();
+            $table->foreignId('category_id')->constrained()->restrictOnDelete();
             $table->integer('quantity')->default(0);
             $table->decimal('price', 10, 2);
             $table->integer('low_stock_threshold')->default(5);

@@ -27,9 +27,6 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Se connecter</button>
                     </form>
-                    <p class="text-center mt-3 mb-0">
-                        Pas de compte ? <a href="{{ route('register') }}">Créer un compte</a>
-                    </p>
                 </div>
             </div>
         </div>
