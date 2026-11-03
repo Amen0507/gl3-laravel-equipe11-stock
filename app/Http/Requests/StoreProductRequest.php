@@ -27,7 +27,7 @@ class StoreProductRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'quantity' => ['required', 'integer', 'min:0'],
             'price' => ['required', 'numeric', 'min:0'],
-            'low_stock_threshold' => ['required', 'integer', 'min:1'],
+            'low_stock_threshold' => ['required', 'integer', 'min:0'],
             'description' => ['nullable', 'string', 'max:1000'],
         ];
     }
@@ -45,7 +45,7 @@ class StoreProductRequest extends FormRequest
             'price.numeric' => 'Le prix doit être un nombre valide.',
             'price.min' => 'Le prix ne peut pas être inférieur à 0.',
             'low_stock_threshold.required' => 'Le seuil de stock faible est obligatoire.',
-            'low_stock_threshold.min' => 'Le seuil doit être au minimum de 1.',
+            'low_stock_threshold.min' => 'Le seuil ne peut pas être négatif.',
         ];
     }
 }
